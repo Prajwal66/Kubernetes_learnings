@@ -1,0 +1,28 @@
+controlplane:~$ kubectl auth can-i get pods --as=apache-user
+no
+controlplane:~$ 
+controlplane:~$ kubectl apply -f apache-rolebinding.yaml 
+rolebinding.rbac.authorization.k8s.io/apache-manager-building created
+controlplane:~$ 
+controlplane:~$ kubectl auth can-i get pods --as=apache-user
+no
+controlplane:~$ kubectl auth can-i get pods --as=apache-user -n apache-namespace
+yes
+controlplane:~$ 
+controlplane:~$ 
+
+controlplane:~$ kubectl auth can-i get deploy --as=apache-user -n apache-namespace
+no
+controlplane:~$ 
+
+
+it say's no so i changed the role.yaml and added deployement access so here is the output
+
+controlplane:~$ kubectl auth can-i get deploy --as=apache-user -n apacher-namespace
+no
+controlplane:~$ kubectl auth can-i get deploy --as=apache-user -n apache-namespace
+yes
+controlplane:~$ 
+controlplane:~$ 
+
+
